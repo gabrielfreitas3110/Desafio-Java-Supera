@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.desafiojavasupera.entities.Product;
 import com.example.desafiojavasupera.repositories.ProductRepository;
+import com.example.desafiojavasupera.services.exception.ObjectNotFoundException;
 
 @Service
 public class ProductService {
@@ -21,6 +22,7 @@ public class ProductService {
 	
 	public Product findById(Long id) {
 		Optional<Product> obj = productRepository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! Id: " + id
+					+ ". Type: " + Product.class.getName()));
 	}
 }
