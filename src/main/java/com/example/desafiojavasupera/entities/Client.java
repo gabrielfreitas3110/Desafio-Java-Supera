@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "tb_client" )
 public class Client implements Serializable {
@@ -26,6 +28,7 @@ public class Client implements Serializable {
 	private String cpf;
 	private String password;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "client")
 	private List<Address> address = new ArrayList<>();
 	
