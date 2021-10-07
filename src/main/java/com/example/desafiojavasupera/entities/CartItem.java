@@ -1,9 +1,7 @@
 package com.example.desafiojavasupera.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

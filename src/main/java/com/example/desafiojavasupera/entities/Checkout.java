@@ -1,13 +1,16 @@
 package com.example.desafiojavasupera.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,17 +20,17 @@ import com.example.desafiojavasupera.entities.enums.OrderStatus;
 @Table(name = "tb_checkout")
 public class Checkout implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	private static final Double FREE_FREIGHT = 250.00;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer orderStatus;
-	private static final Double SHIPPING = 10.00;
 	
 	@OneToOne
 	@MapsId
 	private Cart cart;
-	
+
 	public Checkout() {
 	}
 
@@ -59,6 +62,21 @@ public class Checkout implements Serializable {
 		return Objects.hash(id);
 	}
 
+	public Double getFreight() {
+		if(getSubTotal() >= FREE_FREIGHT)
+			return 0.0;
+		return cart.getFreight();
+	}
+
+
+	public double getSubTotal() {
+		return cart.getSubTotal();
+	}
+	
+	public double getTotal() {
+		return getFreight() + getSubTotal();
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

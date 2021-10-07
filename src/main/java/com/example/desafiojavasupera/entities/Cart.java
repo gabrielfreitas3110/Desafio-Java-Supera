@@ -16,10 +16,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_cart")
 public class Cart  implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final Double FREIGHT_RATE = 10.00;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,6 +62,7 @@ public class Cart  implements Serializable {
 		return itens;
 	}
 
+	@JsonIgnore
 	public Checkout getCheckout() {
 		return checkout;
 	}
@@ -67,6 +71,22 @@ public class Cart  implements Serializable {
 		this.checkout = checkout;
 	}
 
+	
+	public double getSubTotal() {
+		double sum = 0.0;
+		for(CartItem x : itens) {
+			sum += x.getSubTotal();
+		}
+		return sum;
+	}
+
+	public Double getFreight() {
+		int totalProducts = 0;
+		for(CartItem x : itens) {
+			totalProducts += x.getQuantity();
+		}
+		return FREIGHT_RATE * totalProducts;
+	}
 	
 	@Override
 	public int hashCode() {
