@@ -1,13 +1,18 @@
 package com.example.desafiojavasupera.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "tb_product")
@@ -21,6 +26,9 @@ public class Product implements Serializable {
 	private Double price;
 	private Integer score;
 	private String image;
+	
+	@OneToMany(mappedBy = "id.product")
+	private Set<CartItem> itens = new HashSet<>();
 	
 	public Product() {
 	}
@@ -72,12 +80,21 @@ public class Product implements Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	@JsonBackReference
+	public Set<Cart> getOrders() {
+		Set<Cart> set = new HashSet<>();
+		for(CartItem x : itens) {
+			set.add(x.getCart());
+		}
+		return set;
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

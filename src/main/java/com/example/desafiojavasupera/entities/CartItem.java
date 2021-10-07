@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.example.desafiojavasupera.entities.pk.CartItemPk;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "tb_order_item")
@@ -47,7 +47,7 @@ public class CartItem implements Serializable {
 		this.price = price;
 	}
 
-	@JsonIgnore
+	@JsonBackReference
 	public Cart getCart() {
 		return id.getCart();
 	}
@@ -56,7 +56,8 @@ public class CartItem implements Serializable {
 	public void setCart(Cart cart) {
 		id.setCart(cart);
 	}
-
+	
+	
 	public Product getProduct() {
 		return id.getProduct();
 	}
