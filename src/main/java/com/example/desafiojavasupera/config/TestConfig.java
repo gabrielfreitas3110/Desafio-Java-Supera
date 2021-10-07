@@ -8,11 +8,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.example.desafiojavasupera.entities.Address;
+import com.example.desafiojavasupera.entities.Cart;
+import com.example.desafiojavasupera.entities.CartItem;
 import com.example.desafiojavasupera.entities.City;
 import com.example.desafiojavasupera.entities.Client;
 import com.example.desafiojavasupera.entities.Product;
 import com.example.desafiojavasupera.entities.State;
 import com.example.desafiojavasupera.repositories.AddressRepository;
+import com.example.desafiojavasupera.repositories.CartItemRepository;
+import com.example.desafiojavasupera.repositories.CartRepository;
 import com.example.desafiojavasupera.repositories.CityRepository;
 import com.example.desafiojavasupera.repositories.ClientRepository;
 import com.example.desafiojavasupera.repositories.ProductRepository;
@@ -36,6 +40,12 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private AddressRepository addressRepository;
+
+	@Autowired
+	private CartRepository cartRepository;
+	
+	@Autowired
+	private CartItemRepository cartItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -68,5 +78,14 @@ public class TestConfig implements CommandLineRunner {
 		
 		clientRepository.saveAll(Arrays.asList(cli1));
 		addressRepository.saveAll(Arrays.asList(ad1, ad2));
+		
+		Cart car1 = new Cart(null, cli1);
+		cartRepository.saveAll(Arrays.asList(car1));
+		
+		CartItem ci1 = new CartItem(car1, p1, 3, p1.getPrice());
+		CartItem ci2 = new CartItem(car1, p2, 1, p2.getPrice());
+		CartItem ci3 = new CartItem(car1, p3, 2, p3.getPrice());
+		
+		cartItemRepository.saveAll(Arrays.asList(ci1, ci2, ci3));
 	}
 }

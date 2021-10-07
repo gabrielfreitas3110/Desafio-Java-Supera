@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -31,6 +32,10 @@ public class Client implements Serializable {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "client")
 	private List<Address> address = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "client")
+	private List<Cart> orders = new ArrayList<>();
 	
 	public Client() {
 	}
