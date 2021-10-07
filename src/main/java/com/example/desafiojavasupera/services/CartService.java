@@ -43,4 +43,13 @@ public class CartService {
 		obj.removeProduct(cartItem);
 		cartItemRepository.delete(cartItem);
 	}
+	
+	public void addProduct(Long id, Long productId, int qtd) {
+		Cart obj = findById(id);
+		Product product = productRepository.getById(productId);
+		CartItem cartItem = new CartItem(obj, product, qtd, product.getPrice());
+		if(qtd != 0)
+			obj.addProduct(cartItem);
+		cartItemRepository.save(cartItem);
+	}
 }

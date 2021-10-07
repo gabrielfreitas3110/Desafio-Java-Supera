@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.desafiojavasupera.entities.Cart;
@@ -35,6 +36,15 @@ public class CartResource {
 	@PutMapping(value = "{id}/removeProduct/{productId}")
 	public ResponseEntity<Void> removeProduct(@PathVariable Long id, @PathVariable Long productId) {
 		cartService.removeProduct(id, productId);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@PutMapping(value = "{id}/addProduct/{productId}")
+	public ResponseEntity<Void> addProduct(
+			@PathVariable Long id, 
+			@PathVariable Long productId,
+			@RequestParam(value = "qtd", defaultValue = "0") int qtd) {
+		cartService.addProduct(id, productId, qtd);
 		return ResponseEntity.noContent().build();
 	}
 }

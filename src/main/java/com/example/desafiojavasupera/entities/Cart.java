@@ -16,8 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "tb_cart")
 public class Cart  implements Serializable {
@@ -68,7 +66,12 @@ public class Cart  implements Serializable {
 		}
 	}
 
-	@JsonIgnore
+	public void addProduct(CartItem cartItem) {
+		if(!itens.contains(cartItem)) {
+			itens.add(cartItem);
+		}
+	}
+
 	public Checkout getCheckout() {
 		return checkout;
 	}
@@ -83,7 +86,7 @@ public class Cart  implements Serializable {
 		for(CartItem x : itens) {
 			sum += x.getSubTotal();
 		}
-		return sum;
+		return Math.round(sum * 100d) / 100d;
 	}
 
 	public Double getFreight() {
@@ -91,7 +94,7 @@ public class Cart  implements Serializable {
 		for(CartItem x : itens) {
 			totalProducts += x.getQuantity();
 		}
-		return FREIGHT_RATE * totalProducts;
+		return (double) Math.round(FREIGHT_RATE * totalProducts * 100d) / 100d;
 	}
 	
 	@Override
