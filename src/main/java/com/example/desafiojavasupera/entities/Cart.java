@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +31,9 @@ public class Cart  implements Serializable {
 
 	@OneToMany(mappedBy = "id.cart")
 	private Set<CartItem> items = new HashSet<>();
+	
+	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
+	private Checkout checkout;
 	
 	public Cart() {
 	}
@@ -52,6 +57,14 @@ public class Cart  implements Serializable {
 
 	public Set<CartItem> getItems() {
 		return items;
+	}
+
+	public Checkout getCheckout() {
+		return checkout;
+	}
+
+	public void setCheckout(Checkout checkout) {
+		this.checkout = checkout;
 	}
 
 	@Override

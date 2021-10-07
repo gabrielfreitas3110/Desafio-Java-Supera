@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 import com.example.desafiojavasupera.entities.Address;
 import com.example.desafiojavasupera.entities.Cart;
 import com.example.desafiojavasupera.entities.CartItem;
+import com.example.desafiojavasupera.entities.Checkout;
 import com.example.desafiojavasupera.entities.City;
 import com.example.desafiojavasupera.entities.Client;
 import com.example.desafiojavasupera.entities.Product;
 import com.example.desafiojavasupera.entities.State;
+import com.example.desafiojavasupera.entities.enums.OrderStatus;
 import com.example.desafiojavasupera.repositories.AddressRepository;
 import com.example.desafiojavasupera.repositories.CartItemRepository;
 import com.example.desafiojavasupera.repositories.CartRepository;
@@ -87,5 +89,10 @@ public class TestConfig implements CommandLineRunner {
 		CartItem ci3 = new CartItem(car1, p3, 2, p3.getPrice());
 		
 		cartItemRepository.saveAll(Arrays.asList(ci1, ci2, ci3));
+		
+		Checkout ch1 = new Checkout(null, OrderStatus.DELIVERED, car1);
+		car1.setCheckout(ch1);
+		
+		cartRepository.save(car1);
 	}
 }
