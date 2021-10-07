@@ -24,6 +24,11 @@ public class CartItem implements Serializable {
 	public CartItem() {
 	}
 
+	public CartItem(Cart cart, Product product) {
+		id.setCart(cart);
+		id.setProduct(product);
+	}
+	
 	public CartItem(Cart cart, Product product, Integer quantity, Double price) {
 		id.setCart(cart);
 		id.setProduct(product);

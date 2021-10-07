@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,9 +26,15 @@ public class CartResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@GetMapping(value = "{id}")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<Cart> findById(@PathVariable Long id) {
 		Cart obj = cartService.findById(id);
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@PutMapping(value = "{id}/removeProduct/{productId}")
+	public ResponseEntity<Void> removeProduct(@PathVariable Long id, @PathVariable Long productId) {
+		cartService.removeProduct(id, productId);
+		return ResponseEntity.noContent().build();
 	}
 }
