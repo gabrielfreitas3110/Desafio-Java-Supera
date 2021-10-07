@@ -30,7 +30,7 @@ public class Cart  implements Serializable {
 	private Client client;
 
 	@OneToMany(mappedBy = "id.cart")
-	private Set<CartItem> items = new HashSet<>();
+	private Set<CartItem> itens = new HashSet<>();
 	
 	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
 	private Checkout checkout;
@@ -55,8 +55,8 @@ public class Cart  implements Serializable {
 		this.client = client;
 	}
 
-	public Set<CartItem> getItems() {
-		return items;
+	public Set<CartItem> getItens() {
+		return itens;
 	}
 
 	public Checkout getCheckout() {
@@ -67,6 +67,7 @@ public class Cart  implements Serializable {
 		this.checkout = checkout;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

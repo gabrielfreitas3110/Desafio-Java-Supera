@@ -1,7 +1,9 @@
 package com.example.desafiojavasupera.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -65,6 +67,10 @@ public class CartItem implements Serializable {
 	
 	public void setProduct(Product product) {
 		id.setProduct(product);
+	}
+
+	public Double getSubTotal() {
+		return price * quantity;
 	}
 	
 	@Override

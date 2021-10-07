@@ -53,7 +53,7 @@ public class Checkout implements Serializable {
 		if(orderStatus != null)
 			this.orderStatus = orderStatus.getCod();
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
