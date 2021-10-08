@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.example.desafiojavasupera.dto.ClientDTO;
+
 @Entity
 @Table(name = "tb_client" )
 public class Client implements Serializable {
@@ -33,6 +35,14 @@ public class Client implements Serializable {
 	private List<Cart> orders = new ArrayList<>();
 	
 	public Client() {
+	}
+
+	public Client(ClientDTO entity) {
+		this.name = entity.getName();
+		this.email = entity.getEmail();
+		this.phone = entity.getPhone();
+		this.cpf = entity.getCpf();
+		this.password = entity.getPassword();
 	}
 
 	public Client(Long id, String name, String email, String phone, String cpf, String password) {
