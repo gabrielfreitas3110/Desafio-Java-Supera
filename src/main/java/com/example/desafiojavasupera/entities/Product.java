@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_product")
@@ -81,7 +81,7 @@ public class Product implements Serializable {
 		this.image = image;
 	}
 	
-	@JsonBackReference
+	@JsonIgnore
 	public Set<Cart> getOrders() {
 		Set<Cart> set = new HashSet<>();
 		for(CartItem x : itens) {

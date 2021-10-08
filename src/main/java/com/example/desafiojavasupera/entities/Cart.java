@@ -21,6 +21,7 @@ import javax.persistence.Table;
 public class Cart  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Double FREIGHT_RATE = 10.00;
+	private static final Double FREE_FREIGHT = 250.00;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -91,6 +92,8 @@ public class Cart  implements Serializable {
 
 	public Double getFreight() {
 		int totalProducts = 0;
+		if(getSubTotal() >= FREE_FREIGHT)
+			return 0.0;
 		for(CartItem x : itens) {
 			totalProducts += x.getQuantity();
 		}
