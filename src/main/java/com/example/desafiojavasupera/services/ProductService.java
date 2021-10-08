@@ -36,7 +36,8 @@ public class ProductService {
 	
 	public void delete(Long id) {
 		try {
-			productRepository.deleteById(id);
+			Product entity = findById(id);
+			productRepository.delete(entity);
 		} catch (ObjectNotFoundException e) {
 			throw new ObjectNotFoundException(
 					"Product not found! Id: " + id
@@ -47,7 +48,7 @@ public class ProductService {
 	public Product update(Long id, ProductDTO obj) {
 		try {
 			Product entity = findById(id);
-			updateData(new ProductDTO(entity), obj);
+			updateData(entity, obj);
 			return productRepository.save(entity);
 		} catch (ObjectNotFoundException e) {
 			throw new ObjectNotFoundException(
@@ -56,10 +57,17 @@ public class ProductService {
 		} 
 	}
 
-	private void updateData(ProductDTO entity, ProductDTO obj) {
-		entity.setName(obj.getName());
-		entity.setPrice(obj.getPrice());
-		entity.setScore(obj.getScore());
-		entity.setImage(obj.getImage());
+	private void updateData(Product entity, ProductDTO obj) {
+		if(obj.getName() != null)
+			entity.setName(obj.getName());
+
+		if(obj.getPrice() != null)
+			entity.setPrice(obj.getPrice());
+
+		if(obj.getScore() != null)
+			entity.setScore(obj.getScore());
+
+		if(obj.getImage() != null)
+			entity.setImage(obj.getImage());
 	}
 }

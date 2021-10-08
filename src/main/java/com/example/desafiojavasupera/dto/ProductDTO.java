@@ -7,7 +7,6 @@ import com.example.desafiojavasupera.entities.Product;
 public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
 	private String name;
 	private Double price;
 	private Integer score;
@@ -17,19 +16,10 @@ public class ProductDTO implements Serializable {
 	}
 
 	public ProductDTO(Product entity) {
-		id = entity.getId();
 		name = entity.getName();
 		price = entity.getPrice();
 		score = entity.getScore();
 		image = entity.getImage();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {

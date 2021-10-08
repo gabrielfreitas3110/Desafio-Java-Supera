@@ -11,7 +11,6 @@ import com.example.desafiojavasupera.entities.CartItem;
 import com.example.desafiojavasupera.entities.Product;
 import com.example.desafiojavasupera.repositories.CartItemRepository;
 import com.example.desafiojavasupera.repositories.CartRepository;
-import com.example.desafiojavasupera.repositories.ProductRepository;
 import com.example.desafiojavasupera.services.exception.ObjectNotFoundException;
 
 @Service

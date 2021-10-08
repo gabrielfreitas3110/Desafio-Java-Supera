@@ -37,12 +37,12 @@ public class Client implements Serializable {
 	public Client() {
 	}
 
-	public Client(ClientDTO entity) {
-		this.name = entity.getName();
-		this.email = entity.getEmail();
-		this.phone = entity.getPhone();
-		this.cpf = entity.getCpf();
-		this.password = entity.getPassword();
+	public Client(ClientDTO obj) {
+		this.name = obj.getName();
+		this.email = obj.getEmail();
+		this.phone = obj.getPhone();
+		this.cpf = obj.getCpf();
+		this.password = obj.getPassword();
 	}
 
 	public Client(Long id, String name, String email, String phone, String cpf, String password) {

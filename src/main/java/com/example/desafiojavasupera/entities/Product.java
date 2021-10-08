@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.example.desafiojavasupera.dto.ProductDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -32,7 +33,14 @@ public class Product implements Serializable {
 	
 	public Product() {
 	}
-
+	
+	public Product(ProductDTO obj) {
+		this.name = obj.getName();
+		this.price = obj.getPrice();
+		this.score = obj.getScore();
+		this.image = obj.getImage();
+	}
+	
 	public Product(Long id, String name, Double price, Integer score, String image) {
 		this.id = id;
 		this.name = name;

@@ -69,11 +69,7 @@ public class ProductResource {
 	
 	@PostMapping
 	public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO obj) {
-		Product entity = new Product();
-		entity.setImage(obj.getImage());
-		entity.setName(obj.getName());
-		entity.setPrice(obj.getPrice());
-		entity.setScore(obj.getScore());
+		Product entity = new Product(obj);
 		entity = productService.insert(entity);
 		return ResponseEntity.ok().body(obj);
 	}
