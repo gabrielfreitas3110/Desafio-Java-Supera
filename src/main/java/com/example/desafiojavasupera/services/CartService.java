@@ -21,7 +21,7 @@ public class CartService {
 	private CartRepository cartRepository;
 
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductService productService;
 
 	@Autowired
 	private CartItemRepository cartItemRepository;
@@ -32,13 +32,14 @@ public class CartService {
 	
 	public Cart findById(Long id) {
 		Optional<Cart> obj = cartRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! Id: " + id
-					+ ". Type: " + Cart.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Cart not found! Id: " + id
+				+ ". Type: " + Cart.class.getName()));
 	}
 	
 	public void removeProduct(Long id, Long productId) {
 		Cart obj = findById(id);
-		Product product = productRepository.getById(productId);
+		Product product = productService.findById(productId);
 		CartItem cartItem = new CartItem(obj, product);
 		obj.removeProduct(cartItem);
 		cartItemRepository.delete(cartItem);
@@ -46,7 +47,7 @@ public class CartService {
 	
 	public void addProduct(Long id, Long productId, int qtd) {
 		Cart obj = findById(id);
-		Product product = productRepository.getById(productId);
+		Product product = productService.findById(productId);
 		CartItem cartItem = new CartItem(obj, product, qtd, product.getPrice());
 		if(qtd != 0)
 			obj.addProduct(cartItem);
