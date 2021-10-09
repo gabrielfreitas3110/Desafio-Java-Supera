@@ -72,13 +72,15 @@ public class TestConfig implements CommandLineRunner {
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 
 		Client  cli1 = new Client(null, "Gabriel", "gabriel.freitas3110@gmail.com", "64996662498", "75395185200", "password");
+		Client  cli2 = new Client(null, "Anakin", "anakin@gmail.com", "40028922", "15935725811", "41bby");
 		
 		Address ad1 = new Address(null, "Jardim America", 43, "", "74290215", cli1, c1);
 		Address ad2 = new Address(null, "Santos Dumont", 120, "", "75530420", cli1, c2);
-		
+
 		cli1.getAddress().addAll(Arrays.asList(ad1, ad2));
+		cli2.getAddress().addAll(Arrays.asList(ad2));
 		
-		clientRepository.saveAll(Arrays.asList(cli1));
+		clientRepository.saveAll(Arrays.asList(cli1, cli2));
 		addressRepository.saveAll(Arrays.asList(ad1, ad2));
 		
 		Cart car1 = new Cart(null, cli1);
