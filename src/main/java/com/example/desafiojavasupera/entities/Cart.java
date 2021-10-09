@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_cart")
-public class Cart  implements Serializable {
+public class Cart implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Double FREIGHT_RATE = 10.00;
 	private static final Double FREE_FREIGHT = 250.00;
@@ -26,17 +26,17 @@ public class Cart  implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
 
 	@OneToMany(mappedBy = "id.cart")
 	private Set<CartItem> itens = new HashSet<>();
-	
+
 	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
 	private Checkout checkout;
-	
+
 	public Cart() {
 	}
 
@@ -48,7 +48,7 @@ public class Cart  implements Serializable {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public Client getClient() {
 		return client;
 	}
@@ -62,14 +62,8 @@ public class Cart  implements Serializable {
 	}
 
 	public void removeProduct(CartItem cartItem) {
-		if(itens.contains(cartItem)) {
+		if (itens.contains(cartItem)) {
 			itens.remove(cartItem);
-		}
-	}
-
-	public void addProduct(CartItem cartItem) {
-		if(!itens.contains(cartItem)) {
-			itens.add(cartItem);
 		}
 	}
 
@@ -81,10 +75,9 @@ public class Cart  implements Serializable {
 		this.checkout = checkout;
 	}
 
-	
 	public double getSubTotal() {
 		double sum = 0.0;
-		for(CartItem x : itens) {
+		for (CartItem x : itens) {
 			sum += x.getSubTotal();
 		}
 		return Math.round(sum * 100d) / 100d;
@@ -92,14 +85,14 @@ public class Cart  implements Serializable {
 
 	public Double getFreight() {
 		int totalProducts = 0;
-		if(getSubTotal() >= FREE_FREIGHT)
+		if (getSubTotal() >= FREE_FREIGHT)
 			return 0.0;
-		for(CartItem x : itens) {
+		for (CartItem x : itens) {
 			totalProducts += x.getQuantity();
 		}
 		return (double) Math.round(FREIGHT_RATE * totalProducts * 100d) / 100d;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

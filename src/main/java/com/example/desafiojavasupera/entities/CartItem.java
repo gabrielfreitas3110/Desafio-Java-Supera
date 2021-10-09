@@ -11,7 +11,7 @@ import com.example.desafiojavasupera.entities.pk.CartItemPk;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_order_item")
+@Table(name = "tb_cart_item")
 public class CartItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 

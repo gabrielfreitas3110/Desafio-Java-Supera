@@ -28,14 +28,13 @@ public class CartService {
 	public List<Cart> findAll() {
 		return cartRepository.findAll();
 	}
-	
+
 	public Cart findById(Long id) {
 		Optional<Cart> obj = cartRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Cart not found! Id: " + id
-				+ ". Type: " + Cart.class.getName()));
+		return obj.orElseThrow(
+				() -> new ObjectNotFoundException("Cart not found! Id: " + id + ". Type: " + Cart.class.getName()));
 	}
-	
+
 	public void removeProduct(Long id, Long productId) {
 		Cart obj = findById(id);
 		Product product = productService.findById(productId);
@@ -43,13 +42,20 @@ public class CartService {
 		obj.removeProduct(cartItem);
 		cartItemRepository.delete(cartItem);
 	}
-	
+
 	public void addProduct(Long id, Long productId, int qtd) {
 		Cart obj = findById(id);
 		Product product = productService.findById(productId);
 		CartItem cartItem = new CartItem(obj, product, qtd, product.getPrice());
-		if(qtd != 0)
-			obj.addProduct(cartItem);
-		cartItemRepository.save(cartItem);
+		if (!obj.getItens().contains(cartItem)) {
+			cartItemRepository.save(cartItem);
+		} else {
+			for (CartItem f : obj.getItens()) {
+				if (f.getProduct().getName().equals(cartItem.getProduct().getName())) {
+					f.setQuantity(f.getQuantity() + cartItem.getQuantity());
+				}
+			}
+		}
+		cartRepository.save(obj);
 	}
 }
