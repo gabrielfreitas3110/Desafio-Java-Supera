@@ -71,8 +71,8 @@ public class TestConfig implements CommandLineRunner {
 		stateRepository.saveAll(Arrays.asList(s1, s2));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-		Client  cli1 = new Client(null, "Gabriel", "gabriel.freitas3110@gmail.com", "64996662498", "75395185200", "password");
-		Client  cli2 = new Client(null, "Anakin", "anakin@gmail.com", "40028922", "15935725811", "41bby");
+		Client cli1 = new Client(null, "Gabriel", "gabriel.freitas3110@gmail.com", "64996662498", "75395185200", "password");
+		Client cli2 = new Client(null, "Anakin", "anakin@gmail.com", "40028922", "15935725811", "41bby");
 		
 		Address ad1 = new Address(null, "Jardim America", 43, "", "74290215", cli1, c1);
 		Address ad2 = new Address(null, "Santos Dumont", 120, "", "75530420", cli1, c2);
@@ -84,7 +84,8 @@ public class TestConfig implements CommandLineRunner {
 		addressRepository.saveAll(Arrays.asList(ad1, ad2));
 		
 		Cart car1 = new Cart(null, cli1);
-		cartRepository.saveAll(Arrays.asList(car1));
+		Cart car2 = new Cart(null, cli2);
+		cartRepository.saveAll(Arrays.asList(car1,car2));
 		
 		CartItem ci1 = new CartItem(car1, p1, 3, p1.getPrice());
 		CartItem ci2 = new CartItem(car1, p2, 1, p2.getPrice());
