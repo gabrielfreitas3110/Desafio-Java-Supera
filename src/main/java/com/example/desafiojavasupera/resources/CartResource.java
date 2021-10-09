@@ -34,8 +34,11 @@ public class CartResource {
 	}
 	
 	@PutMapping(value = "{id}/removeProduct/{productId}")
-	public ResponseEntity<Void> removeProduct(@PathVariable Long id, @PathVariable Long productId) {
-		cartService.removeProduct(id, productId);
+	public ResponseEntity<Void> removeProduct(
+			@PathVariable Long id, 
+			@PathVariable Long productId,
+			@RequestParam(value = "qtd", defaultValue = "0") int qtd) {
+		cartService.removeProduct(id, productId, qtd);
 		return ResponseEntity.noContent().build();
 	}
 	

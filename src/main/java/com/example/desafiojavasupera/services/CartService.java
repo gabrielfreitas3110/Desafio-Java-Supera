@@ -32,15 +32,33 @@ public class CartService {
 	public Cart findById(Long id) {
 		Optional<Cart> obj = cartRepository.findById(id);
 		return obj.orElseThrow(
-				() -> new ObjectNotFoundException("Cart not found! Id: " + id + ". Type: " + Cart.class.getName()));
+				() -> new ObjectNotFoundException("Cart not found! Id: " + id 
+						+ ". Type: " + Cart.class.getName()));
 	}
-
-	public void removeProduct(Long id, Long productId) {
+	
+	public void removeProduct(Long id, Long productId, int qtd) throws RuntimeException {
 		Cart obj = findById(id);
 		Product product = productService.findById(productId);
-		CartItem cartItem = new CartItem(obj, product);
-		obj.removeProduct(cartItem);
-		cartItemRepository.delete(cartItem);
+		CartItem cartItem = new CartItem(obj, product, qtd, product.getPrice());
+		int cartItemQtd = 0;
+		if (obj.getItens().contains(cartItem)) {
+			for(CartItem f : obj.getItens()) {
+				if (f.getProduct().getName().equals(cartItem.getProduct().getName())) {
+					cartItemQtd = f.getQuantity();
+				}
+			}
+			cartItem.setQuantity(cartItemQtd - cartItem.getQuantity());		
+			cartItemQtd = cartItem.getQuantity();	
+		} 
+		else {
+			throw new ObjectNotFoundException("Product " + product.getName()
+					+" not found in the cart");
+		}
+		if(cartItemQtd > 0) {
+			cartItemRepository.save(cartItem);
+		} else {
+			cartItemRepository.delete(cartItem);
+		}
 	}
 
 	public void addProduct(Long id, Long productId, int qtd) {

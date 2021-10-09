@@ -61,12 +61,6 @@ public class Cart implements Serializable {
 		return itens;
 	}
 
-	public void removeProduct(CartItem cartItem) {
-		if (itens.contains(cartItem)) {
-			itens.remove(cartItem);
-		}
-	}
-
 	public Checkout getCheckout() {
 		return checkout;
 	}
