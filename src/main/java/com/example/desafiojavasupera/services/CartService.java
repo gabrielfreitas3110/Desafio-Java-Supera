@@ -43,14 +43,13 @@ public class CartService {
 		int cartItemQtd = 0;
 		if (obj.getItens().contains(cartItem)) {
 			for(CartItem f : obj.getItens()) {
-				if (f.getProduct().getName().equals(cartItem.getProduct().getName())) {
+				if (f.getProduct().getId().equals(cartItem.getProduct().getId())) {
 					cartItemQtd = f.getQuantity();
 				}
 			}
 			cartItem.setQuantity(cartItemQtd - cartItem.getQuantity());		
 			cartItemQtd = cartItem.getQuantity();	
-		} 
-		else {
+		} else {
 			throw new ObjectNotFoundException("Product " + product.getName()
 					+" not found in the cart");
 		}
@@ -65,15 +64,13 @@ public class CartService {
 		Cart obj = findById(id);
 		Product product = productService.findById(productId);
 		CartItem cartItem = new CartItem(obj, product, qtd, product.getPrice());
-		if (!obj.getItens().contains(cartItem)) {
-			cartItemRepository.save(cartItem);
-		} else {
+		if (obj.getItens().contains(cartItem)) {
 			for (CartItem f : obj.getItens()) {
-				if (f.getProduct().getName().equals(cartItem.getProduct().getName())) {
-					f.setQuantity(f.getQuantity() + cartItem.getQuantity());
+				if (f.getProduct().getId().equals(cartItem.getProduct().getId())) {
+					cartItem.setQuantity(cartItem.getQuantity() + f.getQuantity());
 				}
 			}
-		}
-		cartRepository.save(obj);
+		} 
+		cartItemRepository.save(cartItem);
 	}
 }
