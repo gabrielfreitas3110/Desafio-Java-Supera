@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "aa0d5dc6-19b1-42b7-8d89-e47b84e401d1",
+		"name": "Desafio-Java-Supera Local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Find by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/products/1",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/products",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products by page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/products?page=0",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products order by price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/products/order-by-price?page=0",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"products",
+								"order-by-price"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products order by score",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/products/order-by-score?page=0",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"products",
+								"order-by-score"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products order by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/products/order-by-name?page=0",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"products",
+								"order-by-name"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The Witcher I Wild Hunt\",\r\n    \"price\": 59.5,\r\n    \"score\": 50,\r\n    \"image\": \"the-witcher-i-wild-hunt.png\"\r\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/products/",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Devil May Cry 5\",\r\n    \"price\": 89.99,\r\n    \"score\": 1018,\r\n    \"image\": \"devil-may-cry-5.png\"\r\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/products/11",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"products",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Devil May Cry 5\",\r\n    \"price\": 89.99,\r\n    \"score\": 1018,\r\n    \"image\": \"devil-may-cry-5.png\"\r\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}products/11",
+							"host": [
+								"{{gateway}}products"
+							],
+							"path": [
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Find by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clients/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all client",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/clients",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Client",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Gabriel 2\",\r\n    \"email\": \"gabriel2.freitas3110@gmail.com\",\r\n    \"phone\": \"64996662499\",\r\n    \"cpf\": \"75395185211\",\r\n    \"password\": \"password 2\"\r\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/clients/",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"clients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Client",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Gabriel Augusto\",\r\n    \"email\": \"gabriel.augusto3110@gmail.com\",\r\n    \"phone\": \"64996662500\",\r\n    \"cpf\": \"75395185222\"\r\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/clients/2",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"clients",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Client",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Devil May Cry 5\",\r\n    \"price\": 89.99,\r\n    \"score\": 1018,\r\n    \"image\": \"devil-may-cry-5.png\"\r\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/clients/2",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"clients",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Find by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/cart/1",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"cart",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all carts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/cart",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeProduct",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{gateway}}/cart/1/removeProduct/1?qtd=2",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"cart",
+								"1",
+								"removeProduct",
+								"1"
+							],
+							"query": [
+								{
+									"key": "qtd",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addPProduct",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{gateway}}/cart/1/addProduct/4?qtd=2",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"cart",
+								"1",
+								"addProduct",
+								"4"
+							],
+							"query": [
+								{
+									"key": "qtd",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Checkout",
+			"item": [
+				{
+					"name": "Find by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/checkout/1",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"checkout",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all checkout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}:8080/checkout",
+							"host": [
+								"{{gateway}}"
+							],
+							"port": "8080",
+							"path": [
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
