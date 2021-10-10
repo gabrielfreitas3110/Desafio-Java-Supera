@@ -54,5 +54,4 @@ public class CartServiceTest {
 	@Test
 	public void ShouldAddAProduct() {
 	}
-	
 }

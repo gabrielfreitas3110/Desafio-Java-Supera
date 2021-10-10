@@ -52,11 +52,6 @@ public class Checkout implements Serializable {
 		if(orderStatus != null)
 			this.orderStatus = orderStatus.getCod();
 	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
 
 	public Double getFreight() {
 		return cart.getFreight();
@@ -68,6 +63,11 @@ public class Checkout implements Serializable {
 	
 	public double getTotal() {
 		return getFreight() + getSubTotal();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 	
 	@Override
