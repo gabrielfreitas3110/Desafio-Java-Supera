@@ -46,12 +46,4 @@ public class CartServiceTest {
 		assertEquals(thisCart.getId(), cart.getId());
 		assertEquals(thisCart.getClient().getId(), cart.getClient().getId());
 	}
-	
-	@Test
-	public void ShouldRemoveAProduct() {
-	}
-	
-	@Test
-	public void ShouldAddAProduct() {
-	}
 }
