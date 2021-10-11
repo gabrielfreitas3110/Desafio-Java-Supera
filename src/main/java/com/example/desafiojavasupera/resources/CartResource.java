@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,5 +51,18 @@ public class CartResource {
 			@RequestParam(value = "qtd", defaultValue = "0") int qtd) {
 		cartService.addProduct(id, productId, qtd);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping
+	public ResponseEntity<Cart> insert(@RequestParam(value = "clientId") Long id) {
+		Cart cart = new Cart();
+		cart = cartService.insert(id);
+		return ResponseEntity.ok().body(cart);
+	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Cart> update(@PathVariable Long id, @RequestBody Cart obj) {
+		cartService.update(id, obj);
+		return ResponseEntity.ok().body(obj);
 	}
 }

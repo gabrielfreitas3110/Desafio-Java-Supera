@@ -1,7 +1,10 @@
 package com.example.desafiojavasupera.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.example.desafiojavasupera.entities.Address;
 import com.example.desafiojavasupera.entities.Client;
 
 public class ClientDTO implements Serializable {
@@ -11,7 +14,9 @@ public class ClientDTO implements Serializable {
 	private String email;
 	private String phone;
 	private String cpf;
-	private String password;
+	private String password;	
+	
+	private List<Address> address = new ArrayList<>();
 	
 	public ClientDTO() {
 	}
@@ -62,5 +67,13 @@ public class ClientDTO implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Address> getAddress() {
+		return address;
+	}
+
+	public void addAddress(Address address) {
+		this.address.add(address);
 	}
 }

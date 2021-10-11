@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.desafiojavasupera.entities.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_checkout")
@@ -53,6 +54,15 @@ public class Checkout implements Serializable {
 			this.orderStatus = orderStatus.getCod();
 	}
 
+	@JsonIgnore
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+	
 	public Double getFreight() {
 		return cart.getFreight();
 	}

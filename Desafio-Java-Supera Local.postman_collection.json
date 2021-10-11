@@ -358,13 +358,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{gateway}}/cart/1",
+							"raw": "{{gateway}}/cart/3",
 							"host": [
 								"{{gateway}}"
 							],
 							"path": [
 								"cart",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -382,6 +382,52 @@
 							],
 							"path": [
 								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/cart?clientId=1",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"cart"
+							],
+							"query": [
+								{
+									"key": "clientId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Cart",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/cart?clientId=1",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"cart"
+							],
+							"query": [
+								{
+									"key": "clientId",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -488,11 +534,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{gateway}}:8080/checkout",
+							"raw": "{{gateway}}/checkout",
 							"host": [
 								"{{gateway}}"
 							],
-							"port": "8080",
 							"path": [
 								"checkout"
 							]

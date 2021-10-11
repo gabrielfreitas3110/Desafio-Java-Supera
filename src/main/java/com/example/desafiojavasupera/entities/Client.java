@@ -106,8 +106,8 @@ public class Client implements Serializable {
 		return address;
 	}
 
-	public void setAddress(List<Address> address) {
-		this.address = address;
+	public void addAddress(Address address) {
+		this.address.add(address);
 	}
 
 	@Override

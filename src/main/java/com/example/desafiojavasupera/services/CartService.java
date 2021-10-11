@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.desafiojavasupera.entities.Cart;
 import com.example.desafiojavasupera.entities.CartItem;
+import com.example.desafiojavasupera.entities.Checkout;
+import com.example.desafiojavasupera.entities.Client;
 import com.example.desafiojavasupera.entities.Product;
 import com.example.desafiojavasupera.repositories.CartItemRepository;
 import com.example.desafiojavasupera.repositories.CartRepository;
@@ -24,6 +26,12 @@ public class CartService {
 
 	@Autowired
 	private CartItemRepository cartItemRepository;
+
+	@Autowired
+	private ClientService clientService;
+
+	@Autowired
+	private CheckoutService checkoutservice;
 
 	public List<Cart> findAll() {
 		return cartRepository.findAll();
@@ -72,5 +80,23 @@ public class CartService {
 			}
 		} 
 		cartItemRepository.save(cartItem);
+	}
+	
+	public Cart insert(Long clientId) {
+		Cart cart = new Cart();
+		Checkout checkout = new Checkout();
+		Client client = clientService.findById(clientId);
+		cart.setClient(client);
+		checkout.setCart(cart);
+		checkoutservice.insert(checkout);
+		cart.setCheckout(checkout);
+		return cartRepository.save(cart);
+	}
+	
+	public Cart update(Long id, Cart obj) {
+		Cart entity = findById(id);
+		if(obj.getCheckout().getOrderStatus() != null)
+			entity.getCheckout().setOrderStatus(obj.getCheckout().getOrderStatus());;
+		return cartRepository.save(entity);
 	}
 }

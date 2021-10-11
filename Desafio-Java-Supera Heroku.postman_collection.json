@@ -458,6 +458,52 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Post Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/cart?clientId=1",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"cart"
+							],
+							"query": [
+								{
+									"key": "clientId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Cart",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/cart?clientId=1",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"cart"
+							],
+							"query": [
+								{
+									"key": "clientId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
