@@ -25,15 +25,15 @@ class CheckoutServiceTest {
     @MockBean
     private CheckoutRepository checkoutRepository;
 
-    private Checkout ck1 = new Checkout(3L,null, null);
+    private Checkout ck1 = new Checkout(3L, OrderStatus.WAITING_PAYMENT, null);
     @Test
     void findAll() {
-       assertEquals(0  , checkoutRepository.findAll().size());
-        when(checkoutRepository.findAll())
+       assertEquals(0  , checkoutService.findAll().size());
+        when(checkoutService.findAll())
                 .thenReturn((Stream.of(ck1)).
                         collect(Collectors.toList()));
-        assertEquals(1, checkoutRepository.findAll().size());
-        assertEquals(3L, checkoutRepository.findAll().get(0).getId());
+        assertEquals(1, checkoutService.findAll().size());
+        assertEquals(3L, checkoutService.findAll().get(0).getId());
     }
 
     @Test
@@ -42,20 +42,20 @@ class CheckoutServiceTest {
         String eMessage = "Checkout not found! Id: 10. Type: " + Checkout.class.getName();
         when(checkoutRepository.findById(3L))
                 .thenReturn(Optional.ofNullable(Stream.of(ck1).
-                        collect(Collectors.toList()).get(0)));
-        assertTrue(checkoutRepository.findById(3L).isPresent());
-        assertEquals(3, checkoutRepository.findById(3L).get().getId());
+                        collect(Collectors.toList()).get(0)))   ;
+        assertEquals(3, checkoutService.findById(3L).getId());
         assertThrows(ObjectNotFoundException.class, () -> checkoutService.findById(10L));
         assertEquals(eMessage, exception.getMessage());
     }
 
     @Test
     void insert() {
-        when(checkoutRepository.save(ck1))
+        when(checkoutService.insert(ck1))
             .thenReturn(Stream.of(ck1)
                     .collect(Collectors.toList()).get(0));
-        assertEquals(ck1, checkoutRepository.save(ck1));
-        assertEquals(ck1.getId(), checkoutRepository.save(ck1).getId());
+        assertEquals(ck1, checkoutService.insert(ck1));
+        assertEquals(ck1.getId(), checkoutService.insert(ck1).getId());
+        assertEquals(ck1.getOrderStatus(), checkoutService.insert(ck1).getOrderStatus());
     }
 
     @Test
