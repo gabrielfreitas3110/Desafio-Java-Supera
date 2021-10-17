@@ -55,8 +55,7 @@ public class CartResource {
 	
 	@PostMapping
 	public ResponseEntity<Cart> insert(@RequestParam(value = "clientId") Long id) {
-		Cart cart = new Cart();
-		cart = cartService.insert(id);
+		Cart cart = cartService.insert(id);
 		return ResponseEntity.ok().body(cart);
 	}
 	
