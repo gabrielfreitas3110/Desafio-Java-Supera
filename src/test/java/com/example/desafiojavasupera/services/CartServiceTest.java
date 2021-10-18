@@ -40,23 +40,22 @@ class CartServiceTest {
 
     @Test
     void ShouldFindAllCarts() {
-        assertEquals(0  , cartRepository.findAll().size());
-        when(cartRepository.findAll())
+        assertEquals(0  , cartService.findAll().size());
+        when(cartService.findAll())
                 .thenReturn((Stream.of(c1)).
                         collect(Collectors.toList()));
-        assertEquals(1, cartRepository.findAll().size());
-        assertEquals(3L, cartRepository.findAll().get(0).getId());
+        assertEquals(1, cartService.findAll().size());
+        assertEquals(3L, cartService.findAll().get(0).getId());
     }
 
     @Test
     void ShouldFindACartById() {
         Throwable exception = assertThrows(ObjectNotFoundException.class, () -> cartService.findById(10L));
         String eMessage = "Cart not found! Id: 10. Type: " + Cart.class.getName();
-        when(cartRepository.findById(3L))
+        when(cartRepository.findById(c1.getId()))
                 .thenReturn(Optional.ofNullable(Stream.of(c1).
                         collect(Collectors.toList()).get(0)));
-        assertTrue(cartRepository.findById(3L).isPresent());
-        assertEquals(3, cartRepository.findById(3L).get().getId());
+        assertEquals(3, cartService.findById(3L).getId());
         assertThrows(ObjectNotFoundException.class, () -> cartService.findById(10L));
         assertEquals(eMessage, exception.getMessage());
     }

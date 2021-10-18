@@ -30,7 +30,7 @@ class CheckoutServiceTest {
     void findAll() {
        assertEquals(0  , checkoutService.findAll().size());
         when(checkoutService.findAll())
-                .thenReturn((Stream.of(ck1)).
+                .thenReturn(Stream.of(ck1).
                         collect(Collectors.toList()));
         assertEquals(1, checkoutService.findAll().size());
         assertEquals(3L, checkoutService.findAll().get(0).getId());
